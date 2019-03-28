@@ -31,7 +31,7 @@
 	var pen_size = 10;
 	var pen_color = "red";
 	var width = window.innerWidth * 0.8;
-	var height = window.innerHeight *0.8;
+	var height = window.innerHeight * 0.8;
 
  window.addEventListener('load', resizeCanvas, false);
  resizeCanvas();
@@ -44,7 +44,7 @@
             draw();
         }
 // // draws circles everytime the mouse moves
-	function draw(){
+function draw(){
 		ctx.beginPath();
 		ctx.fillStyle = pen_color;
 		ctx.arc(x,y,pen_size,0,2*Math.PI,true);
@@ -52,10 +52,6 @@
 	}
 
 // device orientation
-window.addEventListener("orientationchange", function() {
-    ctx.clearRect(0, 0, canvas.width, 550);
-    resizeCanvas();
-});
 
 // gets and assings the x and y position of the mouse to variables every time the mouse is moved
 window.addEventListener('mousemove', function (e) {
@@ -69,6 +65,11 @@ window.addEventListener('touchmove', function (e) {
 	y = e.pageY;
 	draw()
 })
+
+window.addEventListener("orientationchange", function() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    resizeCanvas();
+});
 // changes pen color or pen size when the specifc keys are pressed
 window.addEventListener('keyup', function (e) {
 console.log(e.keyCode);
@@ -95,7 +96,7 @@ else if (e.keyCode == 40){
 	}
 }
 else if(e.keyCode == 32){
-	ctx.clearRect(0, 0, canvas.width, 550);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 draw();
 })
