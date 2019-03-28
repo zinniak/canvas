@@ -22,7 +22,6 @@
 </canvas>
 
 <script>
-
 	var canvas = document.querySelector('#canvas');
 	var ctx = canvas.getContext('2d');
 
@@ -34,16 +33,20 @@
 	var w = window.innerWidth * 0.8;
 	var h = window.innerHeight * 0.8;
 
-window.addEventListener('load', function() {
+// invokes the sizeCanvas function when the page loads to set the size of the canvas
+	window.addEventListener('load', function() {
 	sizeCanvas();
 	})
-function sizeCanvas() {
-			canvas.width = w;
-            canvas.height = h;
-};
 
- function resizeCanvas() {
- 	        location.reload();
+// function to set the size of the canvas to be 80% of the screen every time the page is loaded.
+	function sizeCanvas() {
+		canvas.width = w;
+        canvas.height = h;
+	};
+
+// function that reloads the page
+ 	function resizeCanvas() {
+ 	    location.reload();
             // canvas.width = w;
             // canvas.height = h;
             // draw(x,y);
@@ -51,65 +54,67 @@ function sizeCanvas() {
 
         }
 
-
 // // draws circles everytime the mouse moves
-function draw(x,y){
+	function draw(x,y){
 		ctx.beginPath();
 		ctx.fillStyle = pen_color;
 		ctx.arc(x,y,pen_size,0,2*Math.PI,true);
 		ctx.fill();
 	}
 
-
 // gets and assings the x and y position of the mouse to variables every time the mouse is moved
-window.addEventListener('mousemove', function (e) {
-x = e.pageX;
-y = e.pageY;
-draw(x,y)
-})
+	window.addEventListener('mousemove', function (e) {
+		x = e.pageX;
+		y = e.pageY;
+		draw(x,y)
+	})
 
-window.addEventListener('touchmove', function(e){
+	window.addEventListener('touchmove', function(e){
   // e.preventDefault();
-  x = e.changedTouches[0].pageX;
-  y = e.changedTouches[0].pageY;
-  draw(x,y);
-});
+ 		x = e.changedTouches[0].pageX;
+  		y = e.changedTouches[0].pageY;
+  		draw(x,y);
+	});
 
-// device orientation
-window.addEventListener("orientationchange", function() {
-	resizeCanvas();
-});
+// invokes the resizeCnavas function that reloads the page when the screen orientation changes
+	window.addEventListener("orientationchange", function() {
+		resizeCanvas();
+	});
+
+	window.addEventListener('resize', function() {
+		resizeCanvas();
+	});
 
 // changes pen color or pen size when the specifc keys are pressed
-window.addEventListener('keyup', function (e) {
-console.log(e.keyCode);
-if (e.keyCode == 66){
-pen_color = "blue"
-}
-else if (e.keyCode == 89){
-	pen_color = "yellow"
-}
-else if (e.keyCode == 71){
-	pen_color = "green"
-}
-else if (e.keyCode == 82){
-	pen_color = "red"
-}
-else if (e.keyCode == 38){
-	if (pen_size < 50){
-		pen_size = pen_size +2
-}
-}
-else if (e.keyCode == 40){
-	if (pen_size > 2){
-		pen_size = pen_size - 2
+	window.addEventListener('keyup', function (e) {
+	console.log(e.keyCode);
+	if (e.keyCode == 66){
+		pen_color = "blue"
 	}
-}
-else if(e.keyCode == 32){
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-draw();
-})
+	else if (e.keyCode == 89){
+		pen_color = "yellow"
+	}
+	else if (e.keyCode == 71){
+		pen_color = "green"
+	}
+	else if (e.keyCode == 82){
+		pen_color = "red"
+	}
+	else if (e.keyCode == 38){
+		if (pen_size < 50){
+			pen_size = pen_size +2
+		}
+	}
+	else if (e.keyCode == 40){
+		if (pen_size > 2){
+			pen_size = pen_size - 2
+		}
+	}
+	else if(e.keyCode == 32){
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+	}
+	draw();
+	})
 
 </script>
 
