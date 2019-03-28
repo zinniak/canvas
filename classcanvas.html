@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Canvas Example</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Canvas</title>
 	<style type="text/css">
 		canvas{
 			border: 1px solid black;
@@ -10,26 +11,39 @@
 		div{
 			margin:10px;
 		}
+
 	</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
 <body>
-	<h1>Canvas</h1>
 	<canvas id="canvas" width="700" height="500">
   Blank canvas for drawing art
 </canvas>
 
 <script>
+
 	var canvas = document.querySelector('#canvas');
 	var ctx = canvas.getContext('2d');
 
-	var x = 0
-	var y = 0
+	var x = 0;
+	var y = 0;
 	var pen_size = 10;
 	var pen_color = "red";
+	var width = window.innerWidth * 0.8;
+	var height = window.innerHeight *0.8;
 
-// draws circles everytime the mouse moves
+ window.addEventListener('load', resizeCanvas, false);
+ resizeCanvas();
+ // function canvasdraw() {
+ //           ctx.strokeRect(0, 0, width,height);
+ //        }
+ function resizeCanvas() {
+            canvas.width = width;
+            canvas.height = height;
+            draw();
+        }
+// // draws circles everytime the mouse moves
 	function draw(){
 		ctx.beginPath();
 		ctx.fillStyle = pen_color;
@@ -37,16 +51,22 @@
 		ctx.fill();
 	}
 
+// device orientation
+window.addEventListener("orientationchange", function() {
+    ctx.clearRect(0, 0, canvas.width, 550);
+    resizeCanvas();
+});
+
 // gets and assings the x and y position of the mouse to variables every time the mouse is moved
 window.addEventListener('mousemove', function (e) {
-x = e.pageX -5;
-y = e.pageY -75;
+x = e.pageX;
+y = e.pageY;
 draw()
 })
 
 window.addEventListener('touchmove', function (e) {
-	x = e.pageX -5;
-	y = e.pageY -75;
+	x = e.pageX;
+	y = e.pageY;
 	draw()
 })
 // changes pen color or pen size when the specifc keys are pressed
@@ -83,17 +103,18 @@ draw();
 </script>
 <!-- adds a button for picking and inputting pen color -->
 <div>
-    <input tabindex="-1" type="color" id="pencolor" name="pencolor"
+    <input type="color" id="pencolor" name="pencolor"
            value="#e66465">
     <label for="pencolor">Pen Color</label>
 </div>
 </body>
 
-<!-- changes pen color to color from color picker when color is selected -->
+<!-- changes pen color to color from color picker when color is selected. It then removes focus on the button after the input is submitted -->
 <script>
 $("#pencolor").on('input', function(){
 	pen_color = $(this).val();
 	console.log(pen_color)
+	$("#pencolor").blur();
 });
 </script>
 </html>
