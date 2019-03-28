@@ -34,16 +34,19 @@
 	var w = window.innerWidth * 0.8;
 	var h = window.innerHeight * 0.8;
 
- window.addEventListener('load', function (e) {
- 			canvas.width = w;
+window.addEventListener('load', function() {
+	sizeCanvas();
+	});
+function sizeCanvas() {
+			canvas.width = w;
             canvas.height = h;
- });
+};
 
  function resizeCanvas() {
  	        location.reload();
-            canvas.width = w;
-            canvas.height = h;
-            draw(x,y);
+            // canvas.width = w;
+            // canvas.height = h;
+            // draw(x,y);
             // ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         }
