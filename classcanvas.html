@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 	<title>Canvas</title>
 	<style type="text/css">
 		canvas{
@@ -11,17 +10,20 @@
 		div{
 			margin:10px;
 		}
-
 	</style>
+
+<!-- importing JQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
 <body>
+<!-- creating the canvas -->
 	<canvas id="canvas" width="700" height="500">
-  Blank canvas for drawing art
-</canvas>
+ 		Blank canvas for drawing art
+	</canvas>
 
 <script>
+	// converting canvas to 2D object
 	var canvas = document.querySelector('#canvas');
 	var ctx = canvas.getContext('2d');
 
@@ -29,7 +31,6 @@
 	var y = 0;
 	var pen_size = 10;
 	var pen_color = "red";
-	console.log(pen_size)
 	var w = window.innerWidth * 0.8;
 	var h = window.innerHeight * 0.8;
 
@@ -38,7 +39,7 @@
 	sizeCanvas();
 	})
 
-// function to set the size of the canvas to be 80% of the screen every time the page is loaded.
+// function to set the size of the canvas to be 80% of the screen every time the page is loaded
 	function sizeCanvas() {
 		canvas.width = w;
         canvas.height = h;
@@ -47,14 +48,9 @@
 // function that reloads the page
  	function resizeCanvas() {
  	    location.reload();
-            // canvas.width = w;
-            // canvas.height = h;
-            // draw(x,y);
-            // ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         }
 
-// // draws circles everytime the mouse moves
+// draws a line by making continuous cirles on mouse or touch movement
 	function draw(x,y){
 		ctx.beginPath();
 		ctx.fillStyle = pen_color;
@@ -69,8 +65,8 @@
 		draw(x,y)
 	})
 
+// gets and assings the x and y position of the touch point to variables when a point on the screen detects touch
 	window.addEventListener('touchmove', function(e){
-  // e.preventDefault();
  		x = e.changedTouches[0].pageX;
   		y = e.changedTouches[0].pageY;
   		draw(x,y);
@@ -81,6 +77,7 @@
 		resizeCanvas();
 	});
 
+// invokes the resizeCanvas function again when it detects a change in the screen size
 	window.addEventListener('resize', function() {
 		resizeCanvas();
 	});
@@ -118,11 +115,11 @@
 
 </script>
 
-<!-- // adds a button for picking and inputting pen color -->
+<!-- // adds a button for picking pen color -->
 <div>
     <input type="color" id="pencolor" name="pencolor"
-           value="#e66465">
-    <label for="pencolor">Pen Color</label>
+           value="#ff0000">
+<!--     <label for="pencolor">Pen Color</label> -->
 </div>
 </body>
 
