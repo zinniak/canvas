@@ -56,17 +56,29 @@ function draw(){
 // gets and assings the x and y position of the mouse to variables every time the mouse is moved
 window.addEventListener('mousemove', function (e) {
 x = e.pageX;
+console.log(x)
 y = e.pageY;
 draw()
 })
 
-window.addEventListener('touchmove', function (e) {
-	x = e.pageX;
-	y = e.pageY;
-	draw()
-})
+// Get the position of a touch relative to the canvas
+// function getTouchPos(canvasDom, touchEvent) {
+//   var rect = canvasDom.getBoundingClientRect();
+//   return {
+//     x: touchEvent.touches[0].clientX - rect.left,
+//     y: touchEvent.touches[0].clientY - rect.top
+//   };
+// }
+
+// canvas.addEventListener('touchmove', function (e) {
+// 	x = e.targetTouches[0].screenX;
+// 	console.log(x)
+// 	y = e.targetTouches[0].screenY;
+// 	draw()
+// })
 
 window.addEventListener("orientationchange", function() {
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     resizeCanvas();
 });
@@ -101,6 +113,51 @@ else if(e.keyCode == 32){
 draw();
 })
 
+window.addEventListener('touchstart', function(e){
+  x = e.changedTouches[0].pageX;
+  y = e.changedTouches[0].pageY;
+  draw();
+  // x = e.changedTouches[1].pageX; 
+  // y = e.changedTouches[1].pageY;
+  // draw();
+});
+
+window.addEventListener('touchmove', function(e){
+  // e.preventDefault();
+  x = e.changedTouches[0].pageX;
+  y = e.changedTouches[0].pageY;
+  draw();
+  // x = e.changedTouches[1].pageX;
+  // y = e.changedTouches[1].pageY;
+  // draw();
+});
+
+// draw = function(x, y){
+//   canvas.beginPath();
+//   canvas.fillStyle = '#ff8330';
+//   canvas.arc(x, y, 30, 0, 2 * Math.PI);
+//   canvas.fill();
+//   canvas.closePath();
+// };
+// var clientX, clientY;
+
+// window.addEventListener('touchstart', function(e) {
+//   // Cache the client X/Y coordinates
+//   clientX = e.touches[0].clientX;
+//   clientY = e.touches[0].clientY;
+// }, false);
+
+// window.addEventListener('touchend', function(e) {
+//   var deltaX, deltaY;
+
+//   // Compute the change in X and Y coordinates. 
+//   // The first touch point in the changedTouches
+//   // list is the touch point that was just removed from the surface.
+//   deltaX = e.changedTouches[0].clientX - clientX;
+//   deltaY = e.changedTouches[0].clientY - clientY;
+
+//   // Process the data ... 
+// }, false);
 </script>
 <!-- adds a button for picking and inputting pen color -->
 <div>
